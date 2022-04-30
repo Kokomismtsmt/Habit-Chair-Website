@@ -35,7 +35,7 @@ function occupied(){
   let occupancy = true;
     if (occupancy == true){
       var img = document.createElement("img");
-      img.src = "occupied.png";
+      img.src = "occupied.svg";
 
       var div = document.getElementById("seat-occupancy");
       div.appendChild(img);
@@ -43,7 +43,7 @@ function occupied(){
     }
     else{
       var img = document.createElement("img");
-      img.src = "unoccupied.png";
+      img.src = "unoccupied.svg";
   
       var div = document.getElementById("seat-occupancy");
       div.appendChild(img);
