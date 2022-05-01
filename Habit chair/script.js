@@ -20,36 +20,50 @@ const database = getDatabase(app);
 // push(ref(database, 'message/'), 'hi')
 
 // read the data
-onValue(ref(database,'message/time'), (snapshot) => {
-  const time = snapshot.val().hours;
-  document.getElementById("total-time").innerHTML = 'Time:' + time;
+onValue(ref(database,'data/Time'), (snapshot) => {
+  const time = snapshot.val().Hours;
+
+  if(time < 2){
+    document.getElementById("total-time").innerHTML = 'Time: ' + time + ' hour';
+  }else{
+    document.getElementById("total-time").innerHTML = 'Time: ' + time + ' hours';
+  }
+
 });
 
-onValue(ref(database,'message/violations'), (snapshot) => {
-  const vio = snapshot.val().amount;
-  document.getElementById("total-vio").innerHTML = 'Violations:' + vio;
+onValue(ref(database,'data/violations'), (snapshot) => {
+  const vio = snapshot.val().times;
+
+  if (vio < 2){
+    document.getElementById("total-vio").innerHTML = 'Violations: ' + vio + ' time';
+  }else{
+    document.getElementById("total-vio").innerHTML = 'Violations: ' + vio + ' times';
+  }
+});
+
+onValue(ref(database,'data/occupancy'), (snapshot) => {
+  const occupancy = snapshot.val().Status;
+
+  if (occupancy == true){
+    var img = document.createElement("img");
+    img.src = "occupied.png";
+
+    var div = document.getElementById("seat-occupancy-img");
+    div.appendChild(img);
+    document.getElementById('seat-occupancy-txt').innerHTML = "Occupied"
+  }
+  else{
+    var img = document.createElement("img");
+    img.src = "unoccupied.png";
+
+    var div = document.getElementById("seat-occupancy-img");
+    div.appendChild(img);
+    document.getElementById('seat-occupancy-txt').innerHTML = "Not Occupied"
+}
 });
 
 //show img
-function occupied(){
-  let occupancy = true;
-    if (occupancy == true){
-      var img = document.createElement("img");
-      img.src = "occupied.png";
 
-      var div = document.getElementById("seat-occupancy-img");
-      div.appendChild(img);
-      document.getElementById('seat-occupancy-txt').innerHTML = "Occupied"
-    }
-    else{
-      var img = document.createElement("img");
-      img.src = "unoccupied.png";
-  
-      var div = document.getElementById("seat-occupancy-img");
-      div.appendChild(img);
-      document.getElementById('seat-occupancy-txt').innerHTML = "Not Occupied"
-  }
-}
 
 function timer(){
   var currentTime = new Date()
@@ -80,5 +94,5 @@ function timer(){
 
 // calling functions
 
-occupied();
+
 timer();
