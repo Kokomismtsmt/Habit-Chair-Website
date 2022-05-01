@@ -79,17 +79,6 @@ function timer(){
   var t_str = hours + ":" + minutes + ":" + sec + " ";
   document.getElementById('time').innerHTML = t_str;
   setTimeout(timer,1000);
-
-//time reset for day
-  if(hours == 23){
-    set(ref(database,'message/reset/'), {
-      State: "1"
-  })
-}else{
-  set(ref(database,'message/reset/'), {
-    State: "0"
-  })
-}
 }
 
 // calling functions
