@@ -74,6 +74,7 @@ h1{
   box-shadow: 1px 5px 5px var(--shadow);
   text-align: center;
   margin: 0.5rem;
+  user-select: none;
 }
 
 #history{
