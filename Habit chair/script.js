@@ -35,17 +35,17 @@ function occupied(){
   let occupancy = true;
     if (occupancy == true){
       var img = document.createElement("img");
-      img.src = "occupied.svg";
+      img.src = "occupied.png";
 
-      var div = document.getElementById("seat-occupancy");
+      var div = document.getElementById("seat-occupancy-img");
       div.appendChild(img);
       document.getElementById('seat-occupancy-txt').innerHTML = "Occupied"
     }
     else{
       var img = document.createElement("img");
-      img.src = "unoccupied.svg";
+      img.src = "unoccupied.png";
   
-      var div = document.getElementById("seat-occupancy");
+      var div = document.getElementById("seat-occupancy-img");
       div.appendChild(img);
       document.getElementById('seat-occupancy-txt').innerHTML = "Not Occupied"
   }
