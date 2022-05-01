@@ -18,9 +18,14 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const firestore = getFirestore(app);
 
-
-
 const colRef = collection(firestore, 'history');
+
+const div = document.createElement("div");
+
+
+
+
+
 
 
 function timer(){
@@ -44,35 +49,37 @@ function timer(){
 
     }
 
-onValue(ref(database,'message/'),(snapshot) => {
-    const data = snapshot.val();
-    document.getElementById('history-box').innerText = "";
-    for(let key in data){
-    const { message } = data;
-    document.getElementById('history-box').innerText += `${message} \n`
-    }
-});
-
-
-
-function add(){
+function timeCheck(){
     var currentTime = new Date()
     var hours = currentTime.getHours()
+    var minutes = currentTime.getMinutes()
 
-    if(hours == 23){
-        var start = true;
+    function add(){
+        onValue(ref(database,'data/Time'), (snapshot) => {
+            const time = snapshot.val().Hours;
+            
+        onValue(ref(database,'data/violations'), (snapshot) => {
+            const vio = snapshot.val().times;
+        
+            
+            addDoc(colRef, {
+                sittingtime: time,
+                violations: vio,
+            });
+            });
+        });
     }
 
-    if (start == true){
-    addDoc(colRef, {
-        sittingtime: "110",
-        violations: "9",
-     });
+    var trigger = hours + minutes;
+    //var trigger = 82
 
-     var start = false;
-     setTimeout(add,1800000)
+    if(trigger == 82){
+        add();
     }
+
+    setTimeout(timeCheck,60000);
 
 }
+
 timer();
-add();
+timeCheck();
