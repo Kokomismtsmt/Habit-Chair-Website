@@ -17,29 +17,48 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// push(ref(database, 'message/'), 'hi')
+//--------------------------------------show sitting time--------------------------------
 
-// read the data
 onValue(ref(database,'data/Time'), (snapshot) => {
   const time = snapshot.val().Hours;
 
-  if(time < 2){
-    document.getElementById("total-time").innerHTML = 'Time: ' + time + ' hour';
+  if(time == 1){
+    document.getElementById("total-time").innerHTML = 'Sitting time: ' + time + ' hour';
+  }else if(time > 1){
+    document.getElementById("total-time").innerHTML = 'Sitting time: ' + time + ' hours';
   }else{
-    document.getElementById("total-time").innerHTML = 'Time: ' + time + ' hours';
+    document.getElementById("total-time").innerHTML = 'Sitting time: N/A';
   }
 
 });
+
+//-------------------------------show violations-------------------------------
 
 onValue(ref(database,'data/violations'), (snapshot) => {
   const vio = snapshot.val().times;
 
-  if (vio < 2){
+  if (vio == 1){
     document.getElementById("total-vio").innerHTML = 'Violations: ' + vio + ' time';
+  }else if(vio > 1){ 
+    document.getElementById("total-vio").innerHTML = 'Violations: ' + vio + ' times';    
   }else{
-    document.getElementById("total-vio").innerHTML = 'Violations: ' + vio + ' times';
+    document.getElementById("total-vio").innerHTML = 'Violations: None';
   }
 });
+
+//----------------------------show chair online status-----------------------------
+
+onValue(ref(database,'data/online'), (snapshot) => {
+  const online = snapshot.val().state;
+
+  if (online == true){
+    document.getElementById('online-state').innerHTML = "Chair status: Online"
+  }else{
+    document.getElementById('online-state').innerHTML = "Chair status: Offline"
+  }
+})
+
+//------------------------------------show occupancy-----------------------------
 
 onValue(ref(database,'data/occupancy'), (snapshot) => {
   const occupancy = snapshot.val().Status;
@@ -51,8 +70,7 @@ onValue(ref(database,'data/occupancy'), (snapshot) => {
     var div = document.getElementById("seat-occupancy-img");
     div.appendChild(img);
     document.getElementById('seat-occupancy-txt').innerHTML = "Occupied"
-  }
-  else{
+  }else{
     var img = document.createElement("img");
     img.src = "unoccupied.png";
 
@@ -62,7 +80,6 @@ onValue(ref(database,'data/occupancy'), (snapshot) => {
 }
 });
 
-//show img
 
 
 function timer(){

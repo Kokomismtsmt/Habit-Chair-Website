@@ -3,20 +3,16 @@
 :root{
   font-size: 16px;
   --text-primary: rgb(0,3,166);
-  --text-secondary: black;
+  --text-secondary: #303030;
   --bg-primary: rgb(248, 191, 35);
   --bg-secondary: rgb(61, 0, 166);
-  --bg: rgb(238, 238, 238);
+  --bg: rgb(245, 245, 245);
   --shadow: rgb(148, 148, 148); 
 }
 
 body{
   background-color: var(--bg);
-}
-
-body{
   color: black;
-  background-color: white;
   margin: 0;
   padding: 0;
 }
@@ -47,16 +43,17 @@ h1{
 
 .clock{
   font-family: "Monaco", monospace;
-  font-size: 2rem;
+  font-size: 3rem;
   color: var(--text-secondary);
   margin: 0;
+  font-weight: bold;
+  text-align: center;
+  user-select: none;
 }
 
 /* items */
 
-#time{
-  text-align: center;
-}
+
 
 #message{
   flex-grow: 1;
@@ -190,6 +187,16 @@ body::-webkit-scrollbar-thumb{
 }
 
 .vio-logo{
+  display: flex;
+  align-items: center;
+  height: 5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: "Monaco", monospace;
+  font-weight: bold;
+}
+
+.online-status{
   display: flex;
   align-items: center;
   height: 5rem;
