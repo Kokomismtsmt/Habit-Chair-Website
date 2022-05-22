@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
 import { getDatabase, set, ref, push, onValue } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js'
-import { getFirestore, collection, addDoc, getDocs }  from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
+import { getFirestore, query, collection, addDoc, getDocs, onSnapshot }  from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyATJoidVLlpVf4au5cuE1e1Yc1E7kYj6HU",
@@ -20,11 +20,26 @@ const firestore = getFirestore(app);
 
 const colRef = collection(firestore, 'history');
 
-const div = document.createElement("div");
+async function readmultipleDocument(){
+    const historyData = query(colRef);
+    
+    const querySnapshot = await getDocs(historyData);
+    const allDocs = querySnapshot.forEach((snap) => {
+        console.log(`${JSON.stringify(snap.data())}`)
+        document.getElementById('history-box').innerText += `${JSON.stringify(snap.data())} \n`;
+    })
+}
+// const readHistory = async (data) => {
+//     const snapshot = await firestore.collection('history').where('date', '==', datatime).get();
 
 
+//     const history = {
+//         id: doc.id ,...doc.data(),
+//     }
 
-
+//     console.log(history)
+//}
+    
 
 
 
@@ -71,7 +86,7 @@ function timeCheck(){
     }
 
     var trigger = hours + minutes;
-    //var trigger = 82
+    // var trigger = 82
 
     if(trigger == 82){
         add();
@@ -81,5 +96,8 @@ function timeCheck(){
 
 }
 
+// document.getElementById('send-button').addEventListener('click', readHistory)
+
 timer();
 timeCheck();
+readmultipleDocument();
