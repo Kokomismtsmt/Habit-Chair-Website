@@ -21,11 +21,15 @@ const firestore = getFirestore(app);
 const colRef = collection(firestore, 'history');
 
 async function readmultipleDocument(){
-    const historyData = query(colRef);
+    const historyDataRef = query(colRef);
     
-    const querySnapshot = await getDocs(historyData);
+    const querySnapshot = await getDocs(historyDataRef);
     const allDocs = querySnapshot.forEach((snap) => {
-        console.log(`${JSON.stringify(snap.data())}`)
+        var historyData = snap.data();
+
+        
+
+        console.log(`${JSON.stringify(historyData)}`);
         document.getElementById('history-box').innerText += `${JSON.stringify(snap.data())} \n`;
     })
 }
