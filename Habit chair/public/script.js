@@ -3,24 +3,28 @@ import { getDatabase, set, ref, push, onValue } from 'https://www.gstatic.com/fi
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyATJoidVLlpVf4au5cuE1e1Yc1E7kYj6HU",
-  authDomain: "khohzongeu-messaging.firebaseapp.com",
-  databaseURL: "https://khohzongeu-messaging-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "khohzongeu-messaging",
-  storageBucket: "khohzongeu-messaging.appspot.com",
-  messagingSenderId: "464292880544",
-  appId: "1:464292880544:web:238949ba4fc19858c029c5",
-  measurementId: "G-P46XQWYSTE"
+  apiKey: "AIzaSyAHmdwFtSJ7YgBuNHSVdR9mTFHPBYi3Ta4",
+  authDomain: "habit-chair.firebaseapp.com",
+  databaseURL: "https://habit-chair-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "habit-chair",
+  storageBucket: "habit-chair.appspot.com",
+  messagingSenderId: "49817452985",
+  appId: "1:49817452985:web:74ee05a89d9e22c3bd3668",
+  measurementId: "G-XKVYRZ7BPJ"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
+//-----------------------define img changeing variables------------------
+var imgSources = ["occupied.png", "unoccupied.png"]
+var index = 0;
+
 //--------------------------------------show sitting time--------------------------------
 
-onValue(ref(database,'data/Time'), (snapshot) => {
-  const time = snapshot.val().Hours;
+onValue(ref(database,'data/time'), (snapshot) => {
+  const time = snapshot.val().hours;
 
   if(time == 1){
     document.getElementById("total-time").innerHTML = 'Sitting time: ' + time + ' hour';
@@ -61,21 +65,17 @@ onValue(ref(database,'data/online'), (snapshot) => {
 //------------------------------------show occupancy-----------------------------
 
 onValue(ref(database,'data/occupancy'), (snapshot) => {
-  const occupancy = snapshot.val().Status;
+  const occupancy = snapshot.val().status;
 
   if (occupancy == true){
-    var img = document.createElement("img");
-    img.src = "occupied.png";
+    document.getElementById('statusImg').src = imgSources [0];
 
-    var div = document.getElementById("seat-occupancy-img");
-    div.appendChild(img);
+  
     document.getElementById('seat-occupancy-txt').innerHTML = "Occupied"
   }else{
-    var img = document.createElement("img");
-    img.src = "unoccupied.png";
+    document.getElementById('statusImg').src = imgSources [1];
 
-    var div = document.getElementById("seat-occupancy-img");
-    div.appendChild(img);
+
     document.getElementById('seat-occupancy-txt').innerHTML = "Not Occupied"
 }
 });
