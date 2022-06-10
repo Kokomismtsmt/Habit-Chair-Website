@@ -3,14 +3,14 @@ import { getDatabase, set, ref, push, onValue } from 'https://www.gstatic.com/fi
 import { getFirestore, query, collection, addDoc, getDocs, onSnapshot }  from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyATJoidVLlpVf4au5cuE1e1Yc1E7kYj6HU",
-  authDomain: "khohzongeu-messaging.firebaseapp.com",
-  databaseURL: "https://khohzongeu-messaging-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "khohzongeu-messaging",
-  storageBucket: "khohzongeu-messaging.appspot.com",
-  messagingSenderId: "464292880544",
-  appId: "1:464292880544:web:238949ba4fc19858c029c5",
-  measurementId: "G-P46XQWYSTE"
+    apiKey: "AIzaSyAHmdwFtSJ7YgBuNHSVdR9mTFHPBYi3Ta4",
+    authDomain: "habit-chair.firebaseapp.com",
+    databaseURL: "https://habit-chair-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "habit-chair",
+    storageBucket: "habit-chair.appspot.com",
+    messagingSenderId: "49817452985",
+    appId: "1:49817452985:web:74ee05a89d9e22c3bd3668",
+    measurementId: "G-XKVYRZ7BPJ"
 };
 
 // Initialize Firebase
@@ -26,26 +26,26 @@ async function readmultipleDocument(){
     const querySnapshot = await getDocs(historyDataRef);
     const allDocs = querySnapshot.forEach((snap) => {
         var historyData = snap.data();
+        var rawdata = JSON.stringify(snap.data());
+        var stringData = rawdata.toString();
+        const resultDate = /date\":\"([\d]+\/[\d]+)\"/i.exec(rawdata);
+        const resultViolations = /violations\"\:([\d]+)/i.exec(rawdata);
+        const resultsittingtime = /sittingtime\"\:([\d]+)/i.exec(rawdata);
 
-        
-
-        console.log(`${JSON.stringify(historyData)}`);
-        document.getElementById('history-box').innerText += `${JSON.stringify(snap.data())} \n`;
-    })
+        if ((resultDate == null)||(resultsittingtime == null)||(resultViolations == null)) { return; }
+        console.log(rawdata);
+      // console.log("Results")
+        console.log(resultDate[1]);
+        console.log(resultViolations[1]);
+        console.log(resultsittingtime[1]);
+      
+        document.getElementById('history-box').innerText += '\n' + "Date=" + resultDate[1] + ' ' + "Sitting Time=" + resultsittingtime[1] + ' ' + "Violations=" + resultViolations[1]; 
+      // document.getElementById('history-box').innerText += rawdata;
+   });
+       
 }
-// const readHistory = async (data) => {
-//     const snapshot = await firestore.collection('history').where('date', '==', datatime).get();
 
-
-//     const history = {
-//         id: doc.id ,...doc.data(),
-//     }
-
-//     console.log(history)
-//}
     
-
-
 
 function timer(){
     var currentTime = new Date()
@@ -103,5 +103,5 @@ function timeCheck(){
 // document.getElementById('send-button').addEventListener('click', readHistory)
 
 timer();
-timeCheck();
+//timeCheck();
 readmultipleDocument();
