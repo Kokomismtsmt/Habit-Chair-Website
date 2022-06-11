@@ -33,19 +33,28 @@ async function readmultipleDocument(){
         const resultsittingtime = /sittingtime\"\:([\d]+)/i.exec(rawdata);
 
         if ((resultDate == null)||(resultsittingtime == null)||(resultViolations == null)) { return; }
-        console.log(rawdata);
-      // console.log("Results")
         console.log(resultDate[1]);
         console.log(resultViolations[1]);
         console.log(resultsittingtime[1]);
-      
-        document.getElementById('history-box').innerText += '\n' + "Date=" + resultDate[1] + ' ' + "Sitting Time=" + resultsittingtime[1] + ' ' + "Violations=" + resultViolations[1]; 
-      // document.getElementById('history-box').innerText += rawdata;
+        document.getElementById('history-date').innerText += "Date = " + resultDate[1] + '\n';
+       document.getElementById('history-sittingTime').innerText += "Sitting Time = " + resultsittingtime[1] + '\n';
+      document.getElementById('history-violations').innerText += "Violations = " + resultViolations[1] + '\n'; 
    });
        
 }
+// const readHistory = async (data) => {
+//     const snapshot = await firestore.collection('history').where('date', '==', datatime).get();
 
+
+//     const history = {
+//         id: doc.id ,...doc.data(),
+//     }
+
+//     console.log(history)
+//}
     
+
+
 
 function timer(){
     var currentTime = new Date()
@@ -103,5 +112,5 @@ function timeCheck(){
 // document.getElementById('send-button').addEventListener('click', readHistory)
 
 timer();
-//timeCheck();
+timeCheck();
 readmultipleDocument();

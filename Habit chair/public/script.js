@@ -80,7 +80,18 @@ onValue(ref(database,'data/occupancy'), (snapshot) => {
 }
 });
 
+function update(){
 
+  var timer = setInterval(function(){
+    set(ref(database, 'data/occupancy'),{
+      status: 0
+    })
+
+    set(ref(database, 'data/online'),{
+      state: 0
+    })
+  },60000);
+}
 
 function timer(){
   var currentTime = new Date()
@@ -93,6 +104,7 @@ function timer(){
   if (sec < 10){
       sec = "0" + sec
 }
+
   var t_str = hours + ":" + minutes + ":" + sec + " ";
   document.getElementById('time').innerHTML = t_str;
   setTimeout(timer,1000);
@@ -102,3 +114,4 @@ function timer(){
 
 
 timer();
+update();
