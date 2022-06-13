@@ -26,7 +26,7 @@ var index = 0;
 onValue(ref(database,'data/time'), (snapshot) => {
   const time = snapshot.val().hours;
 
-  if(time == 1){
+  if(time > 0){
     document.getElementById("total-time").innerHTML = 'Sitting time: ' + time + ' hour';
   }else if(time > 1){
     document.getElementById("total-time").innerHTML = 'Sitting time: ' + time + ' hours';

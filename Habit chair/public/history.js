@@ -36,9 +36,10 @@ async function readmultipleDocument(){
         console.log(resultDate[1]);
         console.log(resultViolations[1]);
         console.log(resultsittingtime[1]);
-        document.getElementById('history-date').innerText += "Date = " + resultDate[1] + '\n';
-       document.getElementById('history-sittingTime').innerText += "Sitting Time = " + resultsittingtime[1] + '\n';
-      document.getElementById('history-violations').innerText += "Violations = " + resultViolations[1] + '\n'; 
+        
+        document.getElementById('history-date').innerText += '\n' + resultDate[1] ;
+       document.getElementById('history-sittingTime').innerText += '\n' + resultsittingtime[1] + ' Hours';
+      document.getElementById('history-violations').innerText += '\n' + resultViolations[1] + 'times'; 
    });
        
 }

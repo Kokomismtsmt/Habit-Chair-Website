@@ -19,7 +19,6 @@ body{
 
 /* For Text*/
 
-
 h1{
   color: var(--text-secondary);
   text-align: center;
@@ -31,8 +30,9 @@ hr.hr {
   border-top: 1000px solid orange;
 }
 
-
 .history-split{
+  margin: auto;
+  width: 90%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
