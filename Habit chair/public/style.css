@@ -1,13 +1,14 @@
 /*Declare colors*/
 
-:root{
+:root {
   font-size: 16px;
-  --text-primary: rgb(0,3,166);
+  --text-primary: rgb(0, 3, 166);
   --text-secondary: #303030;
   --bg-primary: rgb(248, 191, 35);
   --bg-secondary: rgb(61, 0, 166);
   --bg: rgb(245, 245, 245);
-  --shadow: rgb(148, 148, 148); 
+  --shadow: rgb(148, 148, 148);
+  --bg-color: var(--bg); /* Add a custom property for background color */
 }
 
 body{
