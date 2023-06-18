@@ -3,14 +3,14 @@ import { getDatabase, set, ref, push, onValue } from 'https://www.gstatic.com/fi
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAHmdwFtSJ7YgBuNHSVdR9mTFHPBYi3Ta4",
-  authDomain: "habit-chair.firebaseapp.com",
-  databaseURL: "https://habit-chair-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "habit-chair",
-  storageBucket: "habit-chair.appspot.com",
-  messagingSenderId: "49817452985",
-  appId: "1:49817452985:web:74ee05a89d9e22c3bd3668",
-  measurementId: "G-XKVYRZ7BPJ"
+  apiKey: "AIzaSyCHYnt2NQLlJZCk2ggp3lF1pM_b6cC5mH4",
+  authDomain: "habit-chair-2-0.firebaseapp.com",
+  databaseURL: "https://habit-chair-2-0-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "habit-chair-2-0",
+  storageBucket: "habit-chair-2-0.appspot.com",
+  messagingSenderId: "26305165486",
+  appId: "1:26305165486:web:90f13026582195e077153f",
+  measurementId: "G-1RHYCWRFQY"
 };
 
 // Initialize Firebase
@@ -18,13 +18,13 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 //-----------------------define img changeing variables------------------
-var imgSources = ["occupied.png", "unoccupied.png"]
+var imgSources = ["occupied.png", "unoccupied.png","triangle.png"]
 var index = 0;
 
 //--------------------------------------show sitting time--------------------------------
 
 onValue(ref(database,'data/time'), (snapshot) => {
-  const time = snapshot.val().hours;
+  const time = snapshot.val().hour;
 
   if(time > 0){
     document.getElementById("total-time").innerHTML = 'Sitting time: ' + time + ' hour';
@@ -39,7 +39,7 @@ onValue(ref(database,'data/time'), (snapshot) => {
 //-------------------------------show violations-------------------------------
 
 onValue(ref(database,'data/violations'), (snapshot) => {
-  const vio = snapshot.val().times;
+  const vio = snapshot.val().time;
 
   if (vio == 1){
     document.getElementById("total-vio").innerHTML = 'Violations: ' + vio + ' time';
@@ -79,6 +79,53 @@ onValue(ref(database,'data/occupancy'), (snapshot) => {
     document.getElementById('seat-occupancy-txt').innerHTML = "Not Occupied"
 }
 });
+
+// -------------------------------------front right leg----------------------------
+
+onValue(ref(database,'chair/legs'), (snapshot) => {
+  const frontR = snapshot.val().frontright;
+
+  if(frontR > 490){
+    document.getElementById('weight-fRight').src = imgSources[2];
+   }
+});
+
+// --------------------------------------front left leg----------------------------
+
+onValue(ref(database,'chair/legs'), (snapshot) => {
+  const frontL = snapshot.val().frontleft;
+
+  if(frontL > 500){
+    document.getElementById('weight-fLeft').src = imgSources[0];
+
+  }
+});
+
+// --------------------------------------back right leg----------------------------
+
+onValue(ref(database,'chair/legs'), (snapshot) => {
+  const backR = snapshot.val().backright;
+
+  if(backR > 500){
+    document.getElementById('weight-bRight').src = imgSources[0];
+
+  }else{
+    document.getElementById('weight-bRight').src = imgSources[1];
+  }
+});
+
+// ---------------------------------------back left leg---------------------------
+onValue(ref(database,'chair/legs'), (snapshot) => {
+  const backL = snapshot.val().backleft;
+
+  if(backL > 500){
+    document.getElementById('weight-bLeft').src = imgSources[0];
+
+  }else{
+    document.getElementById('weight-bLeft').src = imgSources[1];
+  }
+});
+
 
 function update(){
 
