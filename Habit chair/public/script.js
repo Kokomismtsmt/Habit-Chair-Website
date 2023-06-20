@@ -84,48 +84,61 @@ onValue(ref(database,'data/occupancy'), (snapshot) => {
 
 onValue(ref(database,'chair/legs'), (snapshot) => {
   const frontR = snapshot.val().frontright;
-
-  if(frontR > 490){
-    document.getElementById('weight-fRight').src = imgSources[2];
-   }
+  const trianglefr = document.getElementById('trianglefr');
+  
+  if (frontR > 1000){
+    trianglefr.classList.remove('hidden1');
+  } 
 });
 
 // --------------------------------------front left leg----------------------------
 
-onValue(ref(database,'chair/legs'), (snapshot) => {
-  const frontL = snapshot.val().frontleft;
+// onValue(ref(database,'chair/legs'), (snapshot) => {
+//   const frontL = snapshot.val().frontleft;
+//   const triangle = document.getElementById('triangle');
 
-  if(frontL > 500){
-    document.getElementById('weight-fLeft').src = imgSources[0];
+//   if(frontL > 1000){
+//     triangle.classList.remove('hidden');
+//   }
+// });
 
-  }
-});
-
-// --------------------------------------back right leg----------------------------
-
+// // // --------------------------------------back right leg----------------------------
 onValue(ref(database,'chair/legs'), (snapshot) => {
   const backR = snapshot.val().backright;
+  const trianglebr = document.getElementById('trianglebr');
 
-  if(backR > 500){
-    document.getElementById('weight-bRight').src = imgSources[0];
+   if(backR > 1000){
+     trianglebr.classList.remove('hidden2');
+   }
+ });
 
-  }else{
-    document.getElementById('weight-bRight').src = imgSources[1];
-  }
+// // // ---------------------------------------back left leg---------------------------
+// onValue(ref(database,'chair/legs'), (snapshot) => {
+//   const backL = snapshot.val().backleft;
+//   const triangle = document.getElementById('trianglebL');
+
+//   if(backL > 1000){
+//     triangle.classList.remove('hidden');
+//   }
+// });
+
+//---------------------------graph---------------------------------------------------
+document.addEventListener("DOMContentLoaded", function() {
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Back Left', 'Front Left', 'Front Right', 'Back Right'],
+      datasets: [{
+        label: 'Weight(N)',
+        data: [10, 10, 10, 10],
+        borderWidth: 5,
+        backgroundColor: ['#FBD786', '#FBD786', '#FBD786', '#FBD786']  
+      }]
+    }
+  });
 });
-
-// ---------------------------------------back left leg---------------------------
-onValue(ref(database,'chair/legs'), (snapshot) => {
-  const backL = snapshot.val().backleft;
-
-  if(backL > 500){
-    document.getElementById('weight-bLeft').src = imgSources[0];
-
-  }else{
-    document.getElementById('weight-bLeft').src = imgSources[1];
-  }
-});
-
 
 function update(){
 
