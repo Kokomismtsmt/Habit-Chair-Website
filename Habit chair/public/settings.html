@@ -48,6 +48,23 @@
             <span class="link-text">History</span>
           </a>
         </li>
+        
+<!-- live button -->
+        <li class="nav-item">
+          <a href="live.html" class="nav-link">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fad"
+              data-icon="live"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              viewBox="0 0 24 24">
+              <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/>
+            </svg>
+            <span class="link-text">Live</span>
+          </a>
+        </li>
 
 <!-- settings button -->
         <li class="nav-item">
@@ -73,14 +90,17 @@
     </nav>
 
     <main>
-    <div class="slider">
-        <input type="checkbox" id="toggle_checkbox">
-        <label for="toggle_checkbox"></label>
-    </div>
+      <div class="silentswitch">
+        <p>silent mode</p>
+        <label class="switch">
+          <input type="checkbox" id="toggle-switch">
+          <span class="slider"></span>
+        </label>
+      </div>
+    
 
     </main>
     <script src="https://kit.fontawesome.com/f0e0e378b0.js" crossorigin="anonymous"></script>
     <script src="script.js" type="module"></script>
-    <script src="switch.js" type="module"></script>
   </body>
 </html>

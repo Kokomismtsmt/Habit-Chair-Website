@@ -225,7 +225,7 @@ body::-webkit-scrollbar-thumb{
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   top: 85%;
   left: calc(85% + 100px);
   transform: translate(-50%, -50%) rotate(0deg) scale(6.75);
@@ -262,13 +262,13 @@ body::-webkit-scrollbar-thumb{
   position: fixed;
   top: 50%;
   left: 35%;
-  transform: translate(-50%, -50%);
-  max-width: 75%;
-  max-height: 75%;
+  transform: translate(-45%, -50%);
+  max-width: 70%;
+  max-height: 70%;
 }
 
 /*------------------------------- legs part ------------------------------ */
-#trianglefr {
+#trianglefR {
   width: 0;
   height: 0;
   border-left: 10px solid transparent;
@@ -277,14 +277,15 @@ body::-webkit-scrollbar-thumb{
   transform: rotate(-7deg);
 }
 
-.fr {
+.frontright {
   display: flex;
-  padding-left: 885px;
+  position: fixed;
+  padding-left: 891px;
   align-items: center;
-  height: 1080px;
+  height: 1111px;
 }
 
-#trianglebr {
+#trianglebR {
   width: 0;
   height: 0;
   border-left: 10px solid transparent;
@@ -293,34 +294,99 @@ body::-webkit-scrollbar-thumb{
   transform: rotate(-7deg);
 }
 
-.br{
-    display: flex;
-    padding-left: 887px;
-    align-items: center;
-    height: 815px;
-  }
-
-/* #triangle3 {
-  width: 0;
-  height: 0;
-  border-left: 30px solid transparent;
-  border-right: 30px solid transparent;
-  border-bottom: 50px solid green;
+.backright {
+  display: flex;
+  position: fixed;
+  padding-left: 892px;
+  align-items: center;
+  height: 847px;
 }
 
-#triangle4 {
+#trianglefL {
   width: 0;
   height: 0;
-  border-left: 30px solid transparent;
-  border-right: 30px solid transparent;
-  border-bottom: 50px solid green;
-}  */
+  border-left: 18px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 20px solid green;
+  transform: rotate(122deg);
+}
 
-.hidden1 {
+.frontleft{
+  display: flex;
+  position: fixed;
+  align-items: center;
+  padding-left: 1200px;
+  height: 1115px;
+}
+
+#trianglebL{
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 20px solid green;
+  transform: rotate(122deg);
+}
+
+.backleft{
+  display: flex;
+  position: fixed;
+  align-items: center;
+  padding-left: 1200px;
+  height: 850px;
+}   
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
   display: none;
 }
 
-.hidden2 {
-  display: none;
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
 }
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.silentswitch{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  left: 50%;
+}
+
+
+
 

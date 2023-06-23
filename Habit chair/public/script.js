@@ -17,6 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
+
 //-----------------------define img changeing variables------------------
 var imgSources = ["occupied.png", "unoccupied.png","triangle.png"]
 var index = 0;
@@ -84,61 +85,71 @@ onValue(ref(database,'data/occupancy'), (snapshot) => {
 
 onValue(ref(database,'chair/legs'), (snapshot) => {
   const frontR = snapshot.val().frontright;
-  const trianglefr = document.getElementById('trianglefr');
   
-  if (frontR > 1000){
-    trianglefr.classList.remove('hidden1');
-  } 
+  if(frontR > 1000){
+    document.getElementById('trianglefR').style.borderBottom = "20px solid red"
+  }else if(frontR <= 1000){
+   document.getElementById('trianglefR').style.borderBottom = "20px solid green"
+  }
 });
 
 // --------------------------------------front left leg----------------------------
 
-// onValue(ref(database,'chair/legs'), (snapshot) => {
-//   const frontL = snapshot.val().frontleft;
-//   const triangle = document.getElementById('triangle');
+onValue(ref(database,'chair/legs'), (snapshot) => {
+  const frontL = snapshot.val().frontleft;
+  
 
-//   if(frontL > 1000){
-//     triangle.classList.remove('hidden');
-//   }
-// });
+  if(frontL > 1000){
+    document.getElementById('trianglefL').style.borderBottom = "20px solid red"
+  }else if(frontL <= 1000){
+   document.getElementById('trianglefL').style.borderBottom = "20px solid green"
+  }
+});
 
-// // // --------------------------------------back right leg----------------------------
+// // // // --------------------------------------back right leg----------------------------
 onValue(ref(database,'chair/legs'), (snapshot) => {
   const backR = snapshot.val().backright;
-  const trianglebr = document.getElementById('trianglebr');
 
    if(backR > 1000){
-     trianglebr.classList.remove('hidden2');
+     document.getElementById('trianglebR').style.borderBottom = "20px solid red"
+   }else if(backR <= 1000){
+    document.getElementById('trianglebR').style.borderBottom = "20px solid green"
    }
  });
 
-// // // ---------------------------------------back left leg---------------------------
-// onValue(ref(database,'chair/legs'), (snapshot) => {
-//   const backL = snapshot.val().backleft;
-//   const triangle = document.getElementById('trianglebL');
+// // // // ---------------------------------------back left leg---------------------------
+onValue(ref(database,'chair/legs'), (snapshot) => {
+  const backL = snapshot.val().backleft;
 
-//   if(backL > 1000){
-//     triangle.classList.remove('hidden');
-//   }
-// });
+  if(backL > 1000){
+    document.getElementById('trianglebL').style.borderBottom = "20px solid red"
+  }else if(backL <= 1000){
+   document.getElementById('trianglebL').style.borderBottom = "20px solid green"
+  }
+});
 
 //---------------------------graph---------------------------------------------------
-document.addEventListener("DOMContentLoaded", function() {
-  const ctx = document.getElementById('myChart');
+onValue(ref(database, 'chair/legs'), (snapshot) => {
+  const backL = parseInt(snapshot.val().backleft);
+  const backR = parseInt(snapshot.val().backright);
+  const frontL = parseInt(snapshot.val().frontleft);
+  const frontR = parseInt(snapshot.val().frontright);
 
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: ['Back Left', 'Front Left', 'Front Right', 'Back Right'],
-      datasets: [{
-        label: 'Weight(N)',
-        data: [10, 10, 10, 10],
-        borderWidth: 5,
-        backgroundColor: ['#FBD786', '#FBD786', '#FBD786', '#FBD786']  
-      }]
-    }
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Front Right', 'Front Left', 'Back Right', 'Back Left'],
+        datasets: [{
+          label: 'Weight(N)',
+          data: [backL, backR, frontL, frontR],
+          borderWidth: 5,
+          backgroundColor: ['#CFB284', '#DFCAA0', '#F6E3BA', '#FFEFCB']
+        }]
+      }
+    });
   });
-});
 
 function update(){
 
@@ -169,6 +180,19 @@ function timer(){
   document.getElementById('time').innerHTML = t_str;
   setTimeout(timer,1000);
 }
+
+const toggleSwitch = document.getElementById('toggle-switch');
+
+toggleSwitch.addEventListener('change', function() {
+  if (this.checked) {
+    // Toggle switch is ON
+    // Perform actions for ON state
+  } else {
+    // Toggle switch is OFF
+    // Perform actions for OFF state
+  }
+});
+
 
 // calling functions
 
