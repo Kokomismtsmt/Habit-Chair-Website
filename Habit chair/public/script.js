@@ -70,25 +70,20 @@ onValue(ref(database,'data/occupancy'), (snapshot) => {
 
   if (occupancy == true){
     document.getElementById('statusImg').src = imgSources [0];
-
-  
     document.getElementById('seat-occupancy-txt').innerHTML = "Occupied"
   }else{
     document.getElementById('statusImg').src = imgSources [1];
-
-
     document.getElementById('seat-occupancy-txt').innerHTML = "Not Occupied"
 }
 });
 
 // -------------------------------------front right leg----------------------------
-
 onValue(ref(database,'chair/legs'), (snapshot) => {
   const frontR = snapshot.val().frontright;
   
-  if(frontR > 1000){
+  if(frontR > 1500){
     document.getElementById('trianglefR').style.borderBottom = "20px solid red"
-  }else if(frontR <= 1000){
+  }else if(frontR <= 1500){
    document.getElementById('trianglefR').style.borderBottom = "20px solid green"
   }
 });
@@ -97,11 +92,10 @@ onValue(ref(database,'chair/legs'), (snapshot) => {
 
 onValue(ref(database,'chair/legs'), (snapshot) => {
   const frontL = snapshot.val().frontleft;
-  
 
-  if(frontL > 1000){
+  if(frontL > 1500){
     document.getElementById('trianglefL').style.borderBottom = "20px solid red"
-  }else if(frontL <= 1000){
+  }else if(frontL <= 1500){
    document.getElementById('trianglefL').style.borderBottom = "20px solid green"
   }
 });
@@ -110,9 +104,9 @@ onValue(ref(database,'chair/legs'), (snapshot) => {
 onValue(ref(database,'chair/legs'), (snapshot) => {
   const backR = snapshot.val().backright;
 
-   if(backR > 1000){
+   if(backR > 1500){
      document.getElementById('trianglebR').style.borderBottom = "20px solid red"
-   }else if(backR <= 1000){
+   }else if(backR <= 1500){
     document.getElementById('trianglebR').style.borderBottom = "20px solid green"
    }
  });
@@ -120,10 +114,10 @@ onValue(ref(database,'chair/legs'), (snapshot) => {
 // // // // ---------------------------------------back left leg---------------------------
 onValue(ref(database,'chair/legs'), (snapshot) => {
   const backL = snapshot.val().backleft;
-
-  if(backL > 1000){
+  
+  if(backL > 1500){
     document.getElementById('trianglebL').style.borderBottom = "20px solid red"
-  }else if(backL <= 1000){
+  }else if(backL <= 1500){
    document.getElementById('trianglebL').style.borderBottom = "20px solid green"
   }
 });
@@ -138,7 +132,7 @@ onValue(ref(database, 'chair/legs'), (snapshot) => {
     const ctx = document.getElementById('myChart');
 
     new Chart(ctx, {
-      type: 'doughnut',
+      type: 'pie',
       data: {
         labels: ['Front Right', 'Front Left', 'Back Right', 'Back Left'],
         datasets: [{
@@ -181,9 +175,21 @@ function timer(){
   setTimeout(timer,1000);
 }
 
-const toggleSwitch = document.getElementById('toggle-switch');
+const toggleSwitch1 = document.getElementById('toggle-switch');
 
-toggleSwitch.addEventListener('change', function() {
+toggleSwitch1.addEventListener('change', function() {
+  if (this.checked) {
+    // Toggle switch is ON
+    // Perform actions for ON state
+  } else {
+    // Toggle switch is OFF
+    // Perform actions for OFF state
+  }
+});
+
+const toggleSwitch2 = document.getElementById('toggle-switch');
+
+toggleSwitch2.addEventListener('change', function() {
   if (this.checked) {
     // Toggle switch is ON
     // Perform actions for ON state

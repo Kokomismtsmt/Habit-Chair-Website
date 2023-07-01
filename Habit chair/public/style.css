@@ -274,15 +274,15 @@ body::-webkit-scrollbar-thumb{
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-bottom: 20px solid green;
-  transform: rotate(-7deg);
+  transform: rotate(-5deg);
 }
 
 .frontright {
   display: flex;
   position: fixed;
-  padding-left: 891px;
+  padding-left: 892px;
   align-items: center;
-  height: 1111px;
+  height: 1109px;
 }
 
 #trianglebR {
@@ -379,12 +379,21 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-.silentswitch{
+.silentswitch1{
   display:flex;
   align-items: center;
   justify-content: center;
   position: fixed;
   left: 50%;
+}
+
+.silentswitch2{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  left: 50%;
+  top: 20%;
 }
 
 
