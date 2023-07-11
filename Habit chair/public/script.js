@@ -81,9 +81,9 @@ onValue(ref(database,'data/occupancy'), (snapshot) => {
 onValue(ref(database,'chair/legs'), (snapshot) => {
   const frontR = snapshot.val().frontright;
   
-  if(frontR > 1500){
+  if(frontR > 20){
     document.getElementById('trianglefR').style.borderBottom = "20px solid red"
-  }else if(frontR <= 1500){
+  }else if(frontR <= 20){
    document.getElementById('trianglefR').style.borderBottom = "20px solid green"
   }
 });
@@ -93,9 +93,9 @@ onValue(ref(database,'chair/legs'), (snapshot) => {
 onValue(ref(database,'chair/legs'), (snapshot) => {
   const frontL = snapshot.val().frontleft;
 
-  if(frontL > 1500){
+  if(frontL > 20){
     document.getElementById('trianglefL').style.borderBottom = "20px solid red"
-  }else if(frontL <= 1500){
+  }else if(frontL <= 20){
    document.getElementById('trianglefL').style.borderBottom = "20px solid green"
   }
 });
@@ -104,9 +104,9 @@ onValue(ref(database,'chair/legs'), (snapshot) => {
 onValue(ref(database,'chair/legs'), (snapshot) => {
   const backR = snapshot.val().backright;
 
-   if(backR > 1500){
+   if(backR > 20){
      document.getElementById('trianglebR').style.borderBottom = "20px solid red"
-   }else if(backR <= 1500){
+   }else if(backR <= 20){
     document.getElementById('trianglebR').style.borderBottom = "20px solid green"
    }
  });
@@ -115,19 +115,19 @@ onValue(ref(database,'chair/legs'), (snapshot) => {
 onValue(ref(database,'chair/legs'), (snapshot) => {
   const backL = snapshot.val().backleft;
   
-  if(backL > 1500){
+  if(backL > 20){
     document.getElementById('trianglebL').style.borderBottom = "20px solid red"
-  }else if(backL <= 1500){
+  }else if(backL <= 20){
    document.getElementById('trianglebL').style.borderBottom = "20px solid green"
   }
 });
 
 //---------------------------graph---------------------------------------------------
 onValue(ref(database, 'chair/legs'), (snapshot) => {
-  const backL = parseInt(snapshot.val().backleft);
-  const backR = parseInt(snapshot.val().backright);
-  const frontL = parseInt(snapshot.val().frontleft);
-  const frontR = parseInt(snapshot.val().frontright);
+  const backL = parseFloat(snapshot.val().backleft);
+  const backR = parseFloat(snapshot.val().backright);
+  const frontL = parseFloat(snapshot.val().frontleft);
+  const frontR = parseFloat(snapshot.val().frontright);
 
     const ctx = document.getElementById('myChart');
 
@@ -139,11 +139,29 @@ onValue(ref(database, 'chair/legs'), (snapshot) => {
           label: 'Weight(N)',
           data: [backL, backR, frontL, frontR],
           borderWidth: 5,
-          backgroundColor: ['#CFB284', '#DFCAA0', '#F6E3BA', '#FFEFCB']
+          backgroundColor: ['#CFB284', '#DFCAA0', '#F6E3BA', '#FFEFCB'],
         }]
       }
-    });
-  });
+    }); 
+
+    const front = parseFloat(frontL+frontR);
+    const back = parseFloat(backL+backR);
+    const right = parseFloat(frontR+backR);
+    const left = parseFloat(frontL+backL);
+
+    if (Math.abs(backR-backL) <= 4 && Math.abs(frontL-frontR) <= 4 && Math.abs(left-right) <= 2 && Math.abs(back-front) <= 12){
+      document.getElementById('posture-direction').innerHTML = "User has correct posture"
+    }else if(Math.abs(back>front) && Math.abs(left-right) <= 3){
+      document.getElementById('posture-direction').innerHTML = "User is leaning backwards"
+    }else if(Math.abs(front>back) && Math.abs(left-right) <= 3){
+      document.getElementById('posture-direction').innerHTML = "User is leaning forward"
+    }else if(Math.abs(left>right) && Math.abs(front-back) <= 20){
+      document.getElementById('posture-direction').innerHTML = "User is leaning left"
+    }else if(Math.abs(right>left) && Math.abs(front-back) <= 20){
+      document.getElementById('posture-direction').innerHTML = "User is leaning right"
+    }
+  }); 
+
 
 function update(){
 

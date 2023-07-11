@@ -3,16 +3,16 @@ import { getDatabase, set, ref, push, onValue } from 'https://www.gstatic.com/fi
 import { getFirestore, query, collection, addDoc, getDocs, onSnapshot }  from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCHYnt2NQLlJZCk2ggp3lF1pM_b6cC5mH4",
-    authDomain: "habit-chair-2-0.firebaseapp.com",
-    databaseURL: "https://habit-chair-2-0-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "habit-chair-2-0",
-    storageBucket: "habit-chair-2-0.appspot.com",
-    messagingSenderId: "26305165486",
-    appId: "1:26305165486:web:90f13026582195e077153f",
-    measurementId: "G-1RHYCWRFQY"
-  };
-
+    apiKey: "AIzaSyAHmdwFtSJ7YgBuNHSVdR9mTFHPBYi3Ta4",
+    authDomain: "habit-chair.firebaseapp.com",
+    databaseURL: "https://habit-chair-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "habit-chair",
+    storageBucket: "habit-chair.appspot.com",
+    messagingSenderId: "49817452985",
+    appId: "1:49817452985:web:74ee05a89d9e22c3bd3668",
+    measurementId: "G-XKVYRZ7BPJ"
+};
+    
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
