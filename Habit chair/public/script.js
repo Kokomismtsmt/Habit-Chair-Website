@@ -122,12 +122,24 @@ onValue(ref(database,'chair/legs'), (snapshot) => {
   }
 });
 
+// ----------------------------------------------back aluminium----------------------------
+onValue(ref(database, 'chair/legs'), (snapshot) => {
+  const backaluminium = parseInt(snapshot.val().aluminium);
+
+  if(backaluminium > 20){
+    document.getElementById('backalu').style.backgroundColor = "green"
+  }else if(backaluminium <= 20){
+    document.getElementById('backalu').style.backgroundColor = "red"
+  }
+})
+
 //---------------------------graph---------------------------------------------------
 onValue(ref(database, 'chair/legs'), (snapshot) => {
   const backL = parseFloat(snapshot.val().backleft);
   const backR = parseFloat(snapshot.val().backright);
   const frontL = parseFloat(snapshot.val().frontleft);
   const frontR = parseFloat(snapshot.val().frontright);
+  const alu = snapshot.val().aluminium;
 
     const ctx = document.getElementById('myChart');
 
@@ -149,7 +161,9 @@ onValue(ref(database, 'chair/legs'), (snapshot) => {
     const right = parseFloat(frontR+backR);
     const left = parseFloat(frontL+backL);
 
-    if (Math.abs(backR-backL) <= 4 && Math.abs(frontL-frontR) <= 4 && Math.abs(left-right) <= 2 && Math.abs(back-front) <= 12){
+    if(front <= 2 && back <= 2 && left <= 2 && right <= 2){
+      document.getElementById('posture-direction').innerHTML = "Chair is unoccupied"
+    }else if (Math.abs(backR-backL) <= 4 && Math.abs(frontL-frontR) <= 4 && Math.abs(left-right) <= 2 && Math.abs(back-front) <= 12 && Math.abs(alu) <=20){
       document.getElementById('posture-direction').innerHTML = "User has correct posture"
     }else if(Math.abs(back>front) && Math.abs(left-right) <= 3){
       document.getElementById('posture-direction').innerHTML = "User is leaning backwards"

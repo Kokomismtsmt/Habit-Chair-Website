@@ -334,7 +334,21 @@ body::-webkit-scrollbar-thumb{
   align-items: center;
   padding-left: 1200px;
   height: 850px;
-}   
+}
+
+#backalu{
+  width: 143px;
+  height: 50px;
+  background-color:green;
+}
+
+.back{
+  display: flex;
+  position: fixed;
+  align-items: center;
+  padding-left: 985px;
+  padding-top: 396px;
+}
 
 .switch {
   position: relative;
@@ -401,7 +415,7 @@ input:checked + .slider:before {
   padding-top: 45%;
   padding-left: 36%;
   position: fixed;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: sans-serif;
   font-weight: bolder;
   font-size: 30px;
   color: black solid;
